@@ -1,0 +1,22 @@
+services:
+  collect-to-snowflake:
+    build:
+      context: .
+    working_dir: /rootless
+    environment:
+      AZURE_SQL_SERVER: ${AZURE_SQL_SERVER:?AZURE_SQL_SERVER is required}
+      AZURE_SQL_DATABASE: ${AZURE_SQL_DATABASE:?AZURE_SQL_DATABASE is required}
+      SNOWFLAKE_TOKEN: ${SNOWFLAKE_TOKEN:?SNOWFLAKE_TOKEN is required}
+      SNOWFLAKE_USER: ${SNOWFLAKE_USER:?SNOWFLAKE_USER is required}
+      SNOWFLAKE_ACCOUNT: ${SNOWFLAKE_ACCOUNT:?SNOWFLAKE_ACCOUNT is required}
+      SNOWFLAKE_ROLE: ${SNOWFLAKE_ROLE:?SNOWFLAKE_ROLE is required}
+      SNOWFLAKE_DATABASE: ${SNOWFLAKE_DATABASE:?SNOWFLAKE_DATABASE is required}
+      SNOWFLAKE_SCHEMA: ${SNOWFLAKE_SCHEMA:?SNOWFLAKE_SCHEMA is required}
+    volumes:
+      - .:/rootless
+      - azure-cli-config:/tmp/azure
+    stdin_open: true
+    tty: true
+
+volumes:
+  azure-cli-config:  # persist azure credentials across runs

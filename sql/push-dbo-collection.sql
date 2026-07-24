@@ -1,0 +1,2 @@
+-- ipload to stage, and ingest
+-- file type should exist there already
